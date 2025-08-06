@@ -27,16 +27,11 @@
 
  	<ItemGroup>
 	 	<!-- Mod -->
-	 	<Compile Include="Source/*" />
+		<!-- <Compile Include="Source/*" />  -->
 		
 	 	<!-- Rimworld -->
 	 	<Reference Include="$(RimWorldPath)/*.dll">
 			<Private>False</Private>
 		</Reference>
-
-		<!-- *Uncomment for Harmony*-->
-		<!-- <Reference Include="../../../../../../steamapps/workshop/content/294100/2009463077/Current/Assemblies/0Harmony.dll">
-			<Private>False</Private>
-		</Reference> -->
 	</ItemGroup>
 </Project>

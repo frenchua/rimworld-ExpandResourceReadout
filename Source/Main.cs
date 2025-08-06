@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using UnityEngine;
 using Verse;
 using RimWorld;
-
-// *Uncomment for Harmony*
-// using System.Reflection;
-// using HarmonyLib;
 
 namespace ExpandResourceReadout {
 

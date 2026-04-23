@@ -22,7 +22,7 @@
         <RimWorldPath Condition="'$(RimWorldPath)' == '' AND '$(OS)' != 'Windows_NT'">../../../RimWorldLinux_Data/Managed</RimWorldPath>
 		-->
 		<!-- Rimworld assembly location on mac: -->
-		<RimWorldPath>../../Contents/Resources/Data/Managed</RimWorldPath>
+		<RimWorldPath>/Users/josh/Library/Application Support/Steam/steamapps/common/RimWorld/RimWorldMac.app/Contents/Resources/Data/Managed</RimWorldPath>
 	</PropertyGroup>
 
  	<ItemGroup>

@@ -5,33 +5,19 @@
 		<TargetFramework>net480</TargetFramework>
 		<PlatformTarget>x64</PlatformTarget>
 
-		<!-- Modify [RootNamespace], [AssemblyName], [OutputPath], [VersionPrefix] -->
 		<RootNamespace>ExpandResourceReadout</RootNamespace>
 		<AssemblyName>ExpandResourceReadout</AssemblyName>
 		<OutputPath>1.6/Assemblies</OutputPath>
-		<VersionPrefix>0.1.0.0</VersionPrefix>
-
-		<!-- Do not generate pdb file -->
-		<DebugType>none</DebugType>
-
-		<DebugSymbols>false</DebugSymbols>
+		<VersionPrefix>0.0.1.0</VersionPrefix>
+		
+		<Optimize>true</Optimize>
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-
-		<!-- Rimworld assembly locations on linux and windows:
-		<RimWorldPath Condition="'$(RimWorldPath)' == '' AND '$(OS)' == 'Windows_NT'">../../../RimWorldWin64_Data/Managed</RimWorldPath>
-        <RimWorldPath Condition="'$(RimWorldPath)' == '' AND '$(OS)' != 'Windows_NT'">../../../RimWorldLinux_Data/Managed</RimWorldPath>
-		-->
-		<!-- Rimworld assembly location on mac: -->
-		<RimWorldPath>/Users/josh/Library/Application Support/Steam/steamapps/common/RimWorld/RimWorldMac.app/Contents/Resources/Data/Managed</RimWorldPath>
 	</PropertyGroup>
 
  	<ItemGroup>
-	 	<!-- Mod -->
-		<!-- <Compile Include="Source/*" />  -->
-		
-	 	<!-- Rimworld -->
-	 	<Reference Include="$(RimWorldPath)/*.dll">
-			<Private>False</Private>
-		</Reference>
+		<!--<Compile Include="Source/*" /> -->
+		<PackageReference Include="Krafs.Rimworld.Ref" Version="*" />
 	</ItemGroup>
 </Project>

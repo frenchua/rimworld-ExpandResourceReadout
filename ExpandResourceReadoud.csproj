@@ -20,5 +20,6 @@
  	<ItemGroup>
 		<!--<Compile Include="Source/*" /> -->
 		<PackageReference Include="Krafs.Rimworld.Ref" Version="*" />
+		<PackageReference Include="Lib.Harmony.Ref" Version="2.4.2" />
 	</ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ namespace ExpandResourceReadout {
         public override void LoadedGame() {
             base.LoadedGame();
             foreach(ThingCategoryDef thingCat in rootCategories) {
-                OpenRecursive(thingCat.treeNode, 32);
+                OpenRecursive(thingCat.treeNode, TreeOpenMasks.ResourceReadout);
             }
         }
 

@@ -28,7 +28,8 @@ public static class RimWorld_Listing_ResourceReadout_DoCategory
         float lineHeight = (float)lineHeightField(__instance);
         Rect rect = new Rect(0.0f, curY, LabelWidth, lineHeight);
         rect.xMin = (float)XAtIndentLevelMethod.Invoke(__instance, new object[] { nestLevel }) + 18f;
-        if (Mouse.IsOver(rect) && Input.GetMouseButtonDown(1))
+
+        if(Mouse.IsOver(rect) && Event.current.type == EventType.MouseDown && Event.current.button == 1)
         {
             Event.current.Use();
             

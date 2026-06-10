@@ -31,7 +31,7 @@ public static class RimWorld_Listing_ResourceReadout_DoThingDef
         Rect rect1 = new Rect(0.0f, curY, LabelWidth, lineHeight);
         rect1.xMin = (float)XAtIndentLevelMethod.Invoke(__instance, new object[] { nestLevel }) + 18f;
 
-        if (Mouse.IsOver(rect1) && Input.GetMouseButtonDown(1))
+        if (Mouse.IsOver(rect1) && Event.current.type == EventType.MouseDown && Event.current.button == 1)
         {
             Event.current.Use();
             

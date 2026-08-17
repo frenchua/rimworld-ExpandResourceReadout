@@ -52,6 +52,11 @@ public class ExpandResourceReadoutComponent : GameComponent
         }
     }
 
+    public void OpenSubtree(TreeNode_ThingCategory node)
+    {
+        OpenRecursive(node, TreeOpenMasks.ResourceReadout);
+    }
+
     private void CloseRecursive(TreeNode_ThingCategory node, int mask)
     {
         // not sure if needed, as all nodes should be openable
@@ -69,5 +74,34 @@ public class ExpandResourceReadoutComponent : GameComponent
         {
             CloseRecursive(thingCat.treeNode, TreeOpenMasks.ResourceReadout);
         }
+    }
+
+    public void CloseSubtree(TreeNode_ThingCategory node)
+    {
+        CloseRecursive(node, TreeOpenMasks.ResourceReadout);
+    }
+
+    public TreeNode_ThingCategory FindContainingNode(ThingDef thingDef)
+    {
+        foreach (ThingCategoryDef thingCat in rootCategories)
+        {
+            TreeNode_ThingCategory found = FindContainingNodeRecursive(thingCat.treeNode, thingDef);
+            if (found != null)
+                return found;
+        }
+        return null;
+    }
+
+    private TreeNode_ThingCategory FindContainingNodeRecursive(TreeNode_ThingCategory node, ThingDef thingDef)
+    {
+        if (node.catDef.childThingDefs.Contains(thingDef))
+            return node;
+        foreach (TreeNode_ThingCategory child in node.ChildCategoryNodes)
+        {
+            TreeNode_ThingCategory found = FindContainingNodeRecursive(child, thingDef);
+            if (found != null)
+                return found;
+        }
+        return null;
     }
 }

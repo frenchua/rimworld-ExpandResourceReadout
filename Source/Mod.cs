@@ -13,8 +13,9 @@ public class Mod : Verse.Mod {
         Harmony.DEBUG = true;
         var harmony = new Harmony(HarmonyId);
         harmony.PatchAll();
+#if DEBUG
         Log.Message($"[{HarmonyId}] Harmony patches applied.");
-
+#endif
         GetSettings<ExpandResourceReadoutSettings>();
     }
 

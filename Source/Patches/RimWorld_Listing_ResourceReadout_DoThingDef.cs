@@ -16,15 +16,33 @@ namespace ExpandResourceReadout.Patches;
 public static class RimWorld_Listing_ResourceReadout_DoThingDef
 {
 
-    static void Postfix(Listing_ResourceReadout __instance, ref ThingDef thingDef, ref int nestLevel)
-    {
-        // protected/private members:
-        var curYField = AccessTools.FieldRefAccess<Listing_ResourceReadout, float>("curY");
-        var LabelWidthProperty = AccessTools.Property(typeof(Listing_ResourceReadout), "LabelWidth");
-        var lineHeightField = AccessTools.FieldRefAccess<Listing_ResourceReadout, float>("lineHeight");
-        var XAtIndentLevelMethod = AccessTools.Method(typeof(Listing_ResourceReadout), "XAtIndentLevel");
+    // protected/private members: resolved once and cached, not per-call, since
+    // this Postfix runs for every visible row on every GUI pass (Layout + Repaint,
+    // every frame the panel is shown) and re-resolving via AccessTools each time
+    // was severe enough to tank framerate once the panel had rows to render.
+    private static readonly AccessTools.FieldRef<Listing_ResourceReadout, float> curYField =
+        AccessTools.FieldRefAccess<Listing_ResourceReadout, float>("curY");
+    private static readonly PropertyInfo LabelWidthProperty =
+        AccessTools.Property(typeof(Listing_ResourceReadout), "LabelWidth");
+    private static readonly AccessTools.FieldRef<Listing_ResourceReadout, float> lineHeightField =
+        AccessTools.FieldRefAccess<Listing_ResourceReadout, float>("lineHeight");
+    private static readonly MethodInfo XAtIndentLevelMethod =
+        AccessTools.Method(typeof(Listing_ResourceReadout), "XAtIndentLevel");
 
-        float curY = (float)curYField(__instance);
+    // A Prefix runs before the original method touches curY, so reading it here is
+    // already correct - no need to snapshot/pass state to a Postfix.
+    //
+    // Vanilla only draws (and advances curY for) this row if count != 0; it returns
+    // early otherwise. We have to replicate that guard, or our hit-test runs against
+    // a stale curY left over from the last row that actually drew, for every zero-count
+    // resource in the tree - letting a skipped row's stale rect steal a click meant for
+    // a completely different, unrelated row.
+    static void Prefix(Listing_ResourceReadout __instance, ref ThingDef thingDef, ref int nestLevel)
+    {
+        if (Find.CurrentMap.resourceCounter.GetCount(thingDef) == 0)
+            return;
+
+        float curY = curYField(__instance);
         float LabelWidth = (float)LabelWidthProperty.GetValue(__instance);
         float lineHeight = (float)lineHeightField(__instance);
 

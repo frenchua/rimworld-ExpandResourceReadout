@@ -20,19 +20,7 @@ public class ExpandResourceReadoutComponent : GameComponent
                           select cat).ToList<ThingCategoryDef>();
     }
 
-    public override void LoadedGame()
-    {
-        base.LoadedGame();
-        OpenAll();
-    }
-
-    public override void StartedNewGame()
-    {
-        base.StartedNewGame();
-        LoadedGame();
-    }
-
-    private void OpenRecursive(TreeNode_ThingCategory node, int mask)
+    public void OpenRecursive(TreeNode_ThingCategory node, int mask)
     {
         // not sure if needed, as all nodes should be openable
         if (!node.Openable)
@@ -40,6 +28,14 @@ public class ExpandResourceReadoutComponent : GameComponent
         node.SetOpen(mask, true);
         foreach (TreeNode_ThingCategory child in node.ChildCategoryNodes)
         {
+            // A child can be resourceReadoutRoot even though it's structurally nested
+            // under this node in the def graph (e.g. Plant Matter's parent is Raw
+            // Resources, but both are independently resourceReadoutRoot) - the readout
+            // draws such children as their own separate top-level rows, not nested
+            // under this one, so don't cascade into them. Vanilla's own
+            // DoCategoryChildren applies this same guard when drawing.
+            if (child.catDef.resourceReadoutRoot)
+                continue;
             OpenRecursive(child, mask);
         }
     }
@@ -52,7 +48,7 @@ public class ExpandResourceReadoutComponent : GameComponent
         }
     }
 
-    private void CloseRecursive(TreeNode_ThingCategory node, int mask)
+    public void CloseRecursive(TreeNode_ThingCategory node, int mask)
     {
         // not sure if needed, as all nodes should be openable
         if (!node.Openable)
@@ -60,6 +56,9 @@ public class ExpandResourceReadoutComponent : GameComponent
         node.SetOpen(mask, false);
         foreach (TreeNode_ThingCategory child in node.ChildCategoryNodes)
         {
+            // See matching comment in OpenRecursive.
+            if (child.catDef.resourceReadoutRoot)
+                continue;
             CloseRecursive(child, mask);
         }
     }

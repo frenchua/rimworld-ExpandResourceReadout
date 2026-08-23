@@ -4,7 +4,6 @@ using Verse;
 using RimWorld;
 using System.Reflection;
 using System.Collections.Generic;
-using System;
 
 namespace ExpandResourceReadout.Patches;
 

@@ -8,17 +8,47 @@ namespace ExpandResourceReadout;
 public class Mod : Verse.Mod {
 
     public const string HarmonyId = "com.jdfrench.RimWorldExpandResourceReadout";
+
+    public static ExpandResourceReadoutSettings Settings { get; private set; }
+
     public Mod(ModContentPack content) : base(content) {
 
-        Harmony.DEBUG = true;
         var harmony = new Harmony(HarmonyId);
         harmony.PatchAll();
-        Log.Message($"[{HarmonyId}] Harmony patches applied.");
 
-        GetSettings<ExpandResourceReadoutSettings>();
+        Settings = GetSettings<ExpandResourceReadoutSettings>();
     }
 
+    public override string SettingsCategory() => Content.Name;
+
     public override void DoSettingsWindowContents(Rect inRect) {
-        Log.Message($"[{HarmonyId}] DoSettingsWindowContents called.");
+        Listing_Standard listing = new Listing_Standard();
+        listing.Begin(inRect);
+
+        listing.Label("Remember resource readout expand/collapse state:");
+        if (listing.RadioButton("Globally (shared by every save)", !Settings.persistPerSave))
+        {
+            Settings.persistPerSave = false;
+            ApplyToCurrentGame();
+        }
+        if (listing.RadioButton("Per save (each save remembers its own)", Settings.persistPerSave))
+        {
+            Settings.persistPerSave = true;
+            ApplyToCurrentGame();
+        }
+
+        listing.End();
+        base.DoSettingsWindowContents(inRect);
+    }
+
+    public override void WriteSettings()
+    {
+        base.WriteSettings();
+        ApplyToCurrentGame();
+    }
+
+    private static void ApplyToCurrentGame()
+    {
+        Current.Game?.GetComponent<ExpandResourceReadoutComponent>()?.ApplyFromCurrentMode();
     }
 }

@@ -10,8 +10,9 @@
         <li>1.6</li>
     </supportedVersions>
     <description>
-    This mod automatically expands the Resource Readout (the list of resources in the top left corner of the screen) when a
-    game is loaded.
+    This mod remembers the Resource Readout's (the list of resources in the top left corner of the screen) expand/collapse
+    state between game loads, either globally across all saves or per save file - configurable in the mod's settings. It
+    also adds a right-click menu to expand or contract the readout.
     </description>
     <modDependencies>
     <li>

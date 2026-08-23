@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A RimWorld mod (Harmony-patched C# DLL) that auto-expands the Resource Readout panel (top-left resource list) when a save loads, and adds a right-click "Expand All / Close All" context menu to it. Targets RimWorld 1.5/1.6. The mod's package ID is `frenchua.ExpandResourceReadout`; it depends on the Harmony mod (`brrainz.harmony`).
+A RimWorld mod (Harmony-patched C# DLL) that remembers the resource readoute view when it is in "category" mode, either in a per-save or global manner. Also includes a right-click menu to expand or contract the resource readout. Targets RimWorld 1.5/1.6. The mod's package ID is `frenchua.ExpandResourceReadout`; it depends on the Harmony mod (`brrainz.harmony`).
 
 This repo *is* the mod folder — it's meant to be cloned directly into a RimWorld `Mods/` directory (see `README.md`), not built and copied elsewhere.
+
+This mod previously had a much more narrow focus of simply auto-expanding the resource readout view when a save game loads.
 
 ## Build
 

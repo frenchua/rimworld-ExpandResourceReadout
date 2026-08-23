@@ -15,8 +15,11 @@ public static class RimWorld_Listing_Tree_OpenCloseWidget
 {
     static void Postfix(int openMask, bool __result)
     {
+        // OpenCloseWidget() returns true if the open bit was flipped, false if it was already in the requested state. We only want to 
+        // persist state when the user actually changed something.
         if (!__result)
             return;
+        // Only persist state if the openMask includes the ResourceReadout bit, since this mod only cares about that one.
         if ((openMask & TreeOpenMasks.ResourceReadout) == 0)
             return;
         Current.Game?.GetComponent<ExpandResourceReadoutComponent>()?.PersistState();

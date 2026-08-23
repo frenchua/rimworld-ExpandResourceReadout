@@ -2,10 +2,8 @@ using HarmonyLib;
 using UnityEngine;
 using Verse;
 using RimWorld;
-using ExpandResourceReadout;
 using System.Reflection;
 using System.Collections.Generic;
-using System;
 
 namespace ExpandResourceReadout.Patches;
 

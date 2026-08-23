@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Verse;
-using RimWorld;
+
 
 namespace ExpandResourceReadout;
 
@@ -104,7 +104,7 @@ public class ExpandResourceReadoutComponent : GameComponent
         PersistState();
     }
 
-    private void WalkTree(System.Action<TreeNode_ThingCategory> visit)
+    private void WalkTree(Action<TreeNode_ThingCategory> visit)
     {
         void Recurse(TreeNode_ThingCategory node)
         {

@@ -61,17 +61,11 @@ public static class RimWorld_Listing_ResourceReadout_DoCategory
                     Current.Game.GetComponent<ExpandResourceReadoutComponent>().CloseAll() 
                 ),
                 new FloatMenuOption("Expand This Category", () =>
-                {
-                    var component = Current.Game.GetComponent<ExpandResourceReadoutComponent>();
-                    component.OpenRecursive(node_, TreeOpenMasks.ResourceReadout);
-                    component.PersistState();
-                }),
+                    Current.Game.GetComponent<ExpandResourceReadoutComponent>().SetOpenRecursive(node_, true)
+                ),
                 new FloatMenuOption("Close This Category", () =>
-                {
-                    var component = Current.Game.GetComponent<ExpandResourceReadoutComponent>();
-                    component.CloseRecursive(node_, TreeOpenMasks.ResourceReadout);
-                    component.PersistState();
-                })
+                    Current.Game.GetComponent<ExpandResourceReadoutComponent>().SetOpenRecursive(node_, false)
+                )
             };
 
             Find.WindowStack.Add(new FloatMenu(options));

@@ -27,19 +27,19 @@ public static class RimWorld_Listing_ResourceReadout_DoCategory
     private static readonly MethodInfo XAtIndentLevelMethod =
         AccessTools.Method(typeof(Listing_ResourceReadout), "XAtIndentLevel");
 
-    // A Prefix runs before the original method touches curY, so reading it here is
-    // already correct - no need to snapshot/pass state to a Postfix.
-    //
-    // Vanilla only draws (and advances curY for) this row if countIn != 0; it skips
-    // entirely otherwise. We have to replicate that guard, or our hit-test runs against
-    // a stale curY left over from the last row that actually drew, for every zero-count
-    // node in the tree - letting a skipped node's stale rect steal a click meant for a
-    // completely different, unrelated row.
+    /// <summary>
+    /// Runs before the vanilla Listing_ResourceReadout.DoCategory() method to add a right-click 
+    /// context menu to the category label.
+    /// </summary>
+    /// <param name="__instance">Original Listing_ResourceReadout instance</param>
+    /// <param name="node">The TreeNode_ThingCategory for which to display resource information</param>
+    /// <param name="nestLevel">The nesting level for indentation</param>
+    /// <param name="openMask">The open mask for the category</param>
     static void Prefix(Listing_ResourceReadout __instance, ref TreeNode_ThingCategory node, ref int nestLevel, ref int openMask)
     {
+        // logic from vanilla Listing_ResourceReadout.DoCategory() 
         if (Find.CurrentMap.resourceCounter.GetCountIn(node.catDef) == 0)
             return;
-
         float curY = curYField(__instance);
         float LabelWidth = (float)LabelWidthProperty.GetValue(__instance);
         float lineHeight = (float)lineHeightField(__instance);

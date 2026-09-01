@@ -13,6 +13,12 @@ namespace ExpandResourceReadout.Patches;
 [HarmonyPatch(typeof(Listing_Tree), "OpenCloseWidget")]
 public static class RimWorld_Listing_Tree_OpenCloseWidget
 {
+    /// <summary>
+    /// Runs after the vanilla Listing_Tree.OpenCloseWidget() method to persist the open/closed state 
+    /// of the resource readout category when the user manually clicks the expand/collapse arrow.
+    /// </summary>
+    /// <param name="openMask">The open mask for the category</param>
+    /// <param name="__result">The result of the vanilla method call</param>
     static void Postfix(int openMask, bool __result)
     {
         // OpenCloseWidget() returns true if the open bit was flipped, false if it was already in the requested state. We only want to 

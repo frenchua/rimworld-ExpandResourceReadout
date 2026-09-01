@@ -97,8 +97,6 @@ public class ExpandResourceReadoutComponent : GameComponent
     {
         WalkTree(node =>
         {
-            //bool open = !state.TryGetValue(node.catDef.defName, out bool saved) || saved;
-            //node.SetOpen(TreeOpenMasks.ResourceReadout, open);
             if(state.TryGetValue(node.catDef.defName, out bool saved))
                 node.SetOpen(TreeOpenMasks.ResourceReadout, saved);
         });
@@ -118,10 +116,7 @@ public class ExpandResourceReadoutComponent : GameComponent
     {
         Dictionary<string, bool> state = Mod.Settings.persistPerSave ? categoryOpenStates : Mod.Settings.globalCategoryOpenStates;
         if (state == null || state.Count == 0)
-        {
-            //OpenAll();
             return;
-        }
         ApplyState(state);
     }
 }

@@ -27,16 +27,16 @@ public static class RimWorld_Listing_ResourceReadout_DoThingDef
     private static readonly MethodInfo XAtIndentLevelMethod =
         AccessTools.Method(typeof(Listing_ResourceReadout), "XAtIndentLevel");
 
-    // A Prefix runs before the original method touches curY, so reading it here is
-    // already correct - no need to snapshot/pass state to a Postfix.
-    //
-    // Vanilla only draws (and advances curY for) this row if count != 0; it returns
-    // early otherwise. We have to replicate that guard, or our hit-test runs against
-    // a stale curY left over from the last row that actually drew, for every zero-count
-    // resource in the tree - letting a skipped row's stale rect steal a click meant for
-    // a completely different, unrelated row.
+    /// <summary>
+    /// Runs before the vanilla Listing_ResourceReadout.DoThingDef() method to add a right-click 
+    /// context menu to the resource readout rows.
+    /// </summary>
+    /// <param name="__instance">Original Listing_ResourceReadout instance</param>
+    /// <param name="thingDef">The ThingDef for which to display resource information</param>
+    /// <param name="nestLevel">The nesting level for indentation</param>
     static void Prefix(Listing_ResourceReadout __instance, ref ThingDef thingDef, ref int nestLevel)
     {
+        // logic from vanilla Listing_ResourceReadout.DoThingDef()
         if (Find.CurrentMap.resourceCounter.GetCount(thingDef) == 0)
             return;
 

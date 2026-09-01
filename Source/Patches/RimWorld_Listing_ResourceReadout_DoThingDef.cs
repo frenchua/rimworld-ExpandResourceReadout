@@ -5,7 +5,7 @@ using RimWorld;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace ExpandResourceReadout.Patches;
+namespace RememberResourceReadout.Patches;
 
 /// <summary>
 /// Patches to RimWorld.Listing_ResourceReadout.DoThingDef().
@@ -54,10 +54,10 @@ public static class RimWorld_Listing_ResourceReadout_DoThingDef
             List<FloatMenuOption> options = new List<FloatMenuOption>
             {
                 new FloatMenuOption("Expand All", () => 
-                    Current.Game.GetComponent<ExpandResourceReadoutComponent>().OpenAll()
+                    Current.Game.GetComponent<RememberResourceReadoutComponent>().OpenAll()
                 ),
                 new FloatMenuOption("Contract All", () => 
-                    Current.Game.GetComponent<ExpandResourceReadoutComponent>().CloseAll()
+                    Current.Game.GetComponent<RememberResourceReadoutComponent>().CloseAll()
                 )
             };
 

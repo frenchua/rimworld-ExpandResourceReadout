@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Verse;
 
-namespace ExpandResourceReadout;
+namespace RememberResourceReadout;
 
-public class ExpandResourceReadoutSettings : ModSettings
+public class RememberResourceReadoutSettings : ModSettings
 {
     public bool persistPerSave = false;
     public Dictionary<string, bool> globalCategoryOpenStates = new Dictionary<string, bool>();

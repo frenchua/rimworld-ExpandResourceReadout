@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
-namespace ExpandResourceReadout;
+namespace RememberResourceReadout;
 
-public class ExpandResourceReadoutComponent : GameComponent
+public class RememberResourceReadoutComponent : GameComponent
 {
 
     private List<ThingCategoryDef> rootCategories;
     private Dictionary<string, bool> categoryOpenStates = new Dictionary<string, bool>();
 
-    public ExpandResourceReadoutComponent(Game g) : base()
+    public RememberResourceReadoutComponent(Game g) : base()
     {
         rootCategories = (from cat in DefDatabase<ThingCategoryDef>.AllDefs
                           where cat.resourceReadoutRoot

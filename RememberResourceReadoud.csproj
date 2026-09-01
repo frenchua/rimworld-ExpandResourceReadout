@@ -6,8 +6,8 @@
 		<LangVersion>latest</LangVersion>
 		<PlatformTarget>x64</PlatformTarget>
 
-		<RootNamespace>ExpandResourceReadout</RootNamespace>
-		<AssemblyName>ExpandResourceReadout</AssemblyName>
+		<RootNamespace>RememberResourceReadout</RootNamespace>
+		<AssemblyName>RimWorld.RememberResourceReadout</AssemblyName>
 		<OutputPath>1.6/Assemblies</OutputPath>
 		<VersionPrefix>0.0.1.0</VersionPrefix>
 		
@@ -18,7 +18,10 @@
 	</PropertyGroup>
 
  	<ItemGroup>
-		<!--<Compile Include="Source/*" /> -->
+		<!-- 
+		Reference assemblies for RimWorld, allowing IDE support even if RimWorld is not installed
+		or the repo is opened outside of the Rimworld Mod's directory.
+		-->
 		<PackageReference Include="Krafs.Rimworld.Ref" Version="*" />
 		<PackageReference Include="Lib.Harmony.Ref" Version="2.4.2" />
 	</ItemGroup>

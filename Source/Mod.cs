@@ -2,20 +2,20 @@ using Verse;
 using UnityEngine;
 using HarmonyLib;
 
-namespace ExpandResourceReadout;
+namespace RememberResourceReadout;
 
 public class Mod : Verse.Mod {
 
-    public const string HarmonyId = "com.jdfrench.RimWorldExpandResourceReadout";
+    public const string HarmonyId = "com.jdfrench.RememberResourceReadout";
 
-    public static ExpandResourceReadoutSettings Settings { get; private set; }
+    public static RememberResourceReadoutSettings Settings { get; private set; }
 
     public Mod(ModContentPack content) : base(content) {
 
         var harmony = new Harmony(HarmonyId);
         harmony.PatchAll();
 
-        Settings = GetSettings<ExpandResourceReadoutSettings>();
+        Settings = GetSettings<RememberResourceReadoutSettings>();
     }
 
     public override string SettingsCategory() => Content.Name;
@@ -48,6 +48,6 @@ public class Mod : Verse.Mod {
 
     private static void ApplyToCurrentGame()
     {
-        Current.Game?.GetComponent<ExpandResourceReadoutComponent>()?.ApplyFromCurrentMode();
+        Current.Game?.GetComponent<RememberResourceReadoutComponent>()?.ApplyFromCurrentMode();
     }
 }

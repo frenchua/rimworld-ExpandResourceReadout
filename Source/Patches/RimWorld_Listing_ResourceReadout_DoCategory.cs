@@ -5,7 +5,7 @@ using RimWorld;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace ExpandResourceReadout.Patches;
+namespace RememberResourceReadout.Patches;
 
 /// <summary>
 /// Patches to RimWorld.Listing_ResourceReadout.DoCategory().
@@ -55,16 +55,16 @@ public static class RimWorld_Listing_ResourceReadout_DoCategory
             List<FloatMenuOption> options = new List<FloatMenuOption>
             {
                 new FloatMenuOption("Expand All", () => 
-                    Current.Game.GetComponent<ExpandResourceReadoutComponent>().OpenAll() 
+                    Current.Game.GetComponent<RememberResourceReadoutComponent>().OpenAll() 
                 ),
                 new FloatMenuOption("Close All", () => 
-                    Current.Game.GetComponent<ExpandResourceReadoutComponent>().CloseAll() 
+                    Current.Game.GetComponent<RememberResourceReadoutComponent>().CloseAll() 
                 ),
                 new FloatMenuOption("Expand This Category", () =>
-                    Current.Game.GetComponent<ExpandResourceReadoutComponent>().SetOpenRecursive(node_, true)
+                    Current.Game.GetComponent<RememberResourceReadoutComponent>().SetOpenRecursive(node_, true)
                 ),
                 new FloatMenuOption("Close This Category", () =>
-                    Current.Game.GetComponent<ExpandResourceReadoutComponent>().SetOpenRecursive(node_, false)
+                    Current.Game.GetComponent<RememberResourceReadoutComponent>().SetOpenRecursive(node_, false)
                 )
             };
 
